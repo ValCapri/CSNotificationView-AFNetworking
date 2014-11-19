@@ -10,6 +10,6 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "7.0"
   s.requires_arc = true
   s.source_files = '*.{h,m}'
-  s.dependency "CSNotificationView", "~> 0.5.1"
-  s.dependency "AFNetworking", "~> 2.4.1"
+  s.dependency "CSNotificationView", "~> 0.5"
+  s.dependency "AFNetworking", "~> 2.5"
 end
