@@ -28,7 +28,7 @@
 #if defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
 
 #import <UIKit/UIKit.h>
-#import <CSNotificationView.h>
+#import <CSNotificationView/CSNotificationView.h>
 
 @class AFURLConnectionOperation;
 
