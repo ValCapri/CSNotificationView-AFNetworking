@@ -7,9 +7,9 @@ Pod::Spec.new do |s|
   s.author       = {'Lionel Schinckus' => 'valcapri@me.com' }
   s.source       = { :git => 'https://github.com/ValCapri/CSNotificationView-AFNetworking.git', :tag => s.version.to_s }
   s.platform     = :ios
-  s.ios.deployment_target = "7.0"
+  s.ios.deployment_target = "8.0"
   s.requires_arc = true
   s.source_files = '*.{h,m}'
   s.dependency "CSNotificationView", "~> 0.5"
-  s.dependency "AFNetworking", "~> 2.5"
+  s.dependency "AFNetworking", "~> 3.0"
 end

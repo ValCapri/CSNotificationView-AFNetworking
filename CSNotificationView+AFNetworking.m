@@ -22,13 +22,7 @@
 
 #import "CSNotificationView+AFNetworking.h"
 
-#if defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
-
-#import "AFURLConnectionOperation.h"
-
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
 #import "AFURLSessionManager.h"
-#endif
 
 static void AFGetAlertViewTitleAndMessageFromError(NSError *error, NSString * __autoreleasing *title, NSString * __autoreleasing *message) {
     if (error.localizedDescription && (error.localizedRecoverySuggestion || error.localizedFailureReason)) {
@@ -50,8 +44,6 @@ static void AFGetAlertViewTitleAndMessageFromError(NSError *error, NSString * __
 
 @implementation CSNotificationView (AFNetworking)
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-
 + (void)showNotificationViewForTaskWithErrorOnCompletion:(NSURLSessionTask *)task
                                        controller:(UIViewController*)controller
 {
@@ -68,30 +60,5 @@ static void AFGetAlertViewTitleAndMessageFromError(NSError *error, NSString * __
         [[NSNotificationCenter defaultCenter] removeObserver:observer name:AFNetworkingTaskDidCompleteNotification object:notification.object];
     }];
 }
-#endif
-
-#pragma mark -
-
-+ (void)showNotificationViewForRequestOperationWithErrorOnCompletion:(AFURLConnectionOperation *)operation
-                                                     controller:(UIViewController*)controller
-{
-    __block id observer = [[NSNotificationCenter defaultCenter] addObserverForName:AFNetworkingOperationDidFinishNotification object:operation queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
-        
-        if (notification.object && [notification.object isKindOfClass:[AFURLConnectionOperation class]]) {
-            NSError *error = [(AFURLConnectionOperation *)notification.object error];
-            if (error) {
-                NSString *title, *message;
-                AFGetAlertViewTitleAndMessageFromError(error, &title, &message);
-                
-                [CSNotificationView showInViewController:controller style:CSNotificationViewStyleError message:message];
-            }
-        }
-        
-        [[NSNotificationCenter defaultCenter] removeObserver:observer name:AFNetworkingOperationDidFinishNotification object:notification.object];
-    }];
-}
 
 @end
-
-#endif
-

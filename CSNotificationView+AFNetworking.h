@@ -25,12 +25,8 @@
 
 #import <Availability.h>
 
-#if defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
-
 #import <UIKit/UIKit.h>
 #import <CSNotificationView/CSNotificationView.h>
-
-@class AFURLConnectionOperation;
 
 /**
  This category adds methods to the `CSNotificationView` class. The methods in this category provide support for automatically showing a notification if a session task or request operation finishes with an error. Notification title and message are filled from the corresponding `localizedDescription` & `localizedRecoverySuggestion` or `localizedFailureReason` of the error.
@@ -47,25 +43,8 @@
  @param task The session task.
  @param controller The view controller.
  */
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
 + (void)showNotificationViewForTaskWithErrorOnCompletion:(NSURLSessionTask *)task
                                          controller:(UIViewController*)controller;
-#endif
-
-///------------------------------------------
-/// @name Showing Notification for Request Operation
-///------------------------------------------
-
-/**
- Shows an notification view with the error of the specified request operation, if any.
- 
- @param operation The request operation.
- @param controller The view controller.
- */
-+ (void)showNotificationViewForRequestOperationWithErrorOnCompletion:(AFURLConnectionOperation *)operation
-                                                     controller:(UIViewController*)controller;
-
 
 @end
 
-#endif
